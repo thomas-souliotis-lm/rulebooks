@@ -3,10 +3,11 @@
   hosts: localhost
   sources:
     - ansible.eda.generic:
-        payload: []
+        payload:
+          - dummy_key: "just here to keep the source valid"
   rules:
     - name: Log every event received from OpsDirector
-      condition: event.meta is defined or true
+      condition: event.payload is defined
       action:
         debug:
-          msg: "Received event from OpsDirector: {{ event }}"
+          msg: "Received event from OpsDirector: {{ event.payload }}"
