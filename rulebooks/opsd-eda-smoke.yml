@@ -5,6 +5,8 @@
     - ansible.eda.generic:
         payload:
           - dummy: "keep source valid"
+        delay: 999999
+        loop_count: 999999
   rules:
     - name: Log every event received from OpsDirector
       condition: event.meta is defined or true
