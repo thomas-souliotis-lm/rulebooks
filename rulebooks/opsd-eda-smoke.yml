@@ -1,0 +1,12 @@
+---
+- name: OpsDirector EDA smoke test
+  hosts: localhost
+  sources:
+    - ansible.eda.generic:
+        payload: []
+  rules:
+    - name: Log every event received from OpsDirector
+      condition: event is defined
+      action:
+        debug:
+          msg: "Received event from OpsDirector: {{ event }}"
