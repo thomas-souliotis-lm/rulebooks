@@ -6,7 +6,7 @@
         payload: []
   rules:
     - name: Log every event received from OpsDirector
-      condition: event is defined
+      condition: event.meta is defined or true
       action:
         debug:
           msg: "Received event from OpsDirector: {{ event }}"
