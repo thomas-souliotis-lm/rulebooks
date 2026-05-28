@@ -2,14 +2,20 @@
 - name: OpsDirector EDA smoke test
   hosts: localhost
   sources:
-    - ansible.eda.generic:
+    # This placeholder source keeps the activation alive. When you attach an AAP
+    # Event Stream to this activation and map it to the source named below, AAP
+    # swaps this plugin for the event-stream listener at runtime. The startup_delay
+    # also keeps the activation Running (idle) even if the stream is not mapped.
+    - name: opsd_event_stream_source
+      ansible.eda.generic:
         payload:
-          - dummy: "keep source valid"
-        delay: 999999
-        loop_count: 999999
+          - ping: startup
+        startup_delay: 86400
   rules:
     - name: Log every event received from OpsDirector
-      condition: event.meta is defined or true
+      # Always-true catch-all that still references a valid identifier (event.*),
+      # so the EDA condition parser accepts it and every incoming event matches.
+      condition: event.meta is defined or event.meta is not defined
       action:
         debug:
           var: event
