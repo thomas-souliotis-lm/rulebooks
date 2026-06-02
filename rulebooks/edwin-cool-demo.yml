@@ -1,8 +1,8 @@
 ---
-- name: OpsDirector EDA Cool Demo
+- name: Edwin EDA Cool Demo
   hosts: localhost
   sources:
-    - name: opsd_event_stream_source
+    - name: edwin_event_stream_source
       ansible.eda.generic:
         payload:
           - ping: startup
@@ -28,8 +28,8 @@
         debug:
           msg: "DATABASE DOWN: Alerting DBA team for {{ event.payload.host }} and running diagnostic checks..."
 
-    - name: Catch-all for other OpsDirector events
+    - name: Catch-all for other Edwin events
       condition: event.meta is defined or event.meta is not defined
       action:
         debug:
-          msg: "Received non-critical event from OpsDirector: {{ event.payload }}"
+          msg: "Received non-critical event from Edwin: {{ event.payload }}"
