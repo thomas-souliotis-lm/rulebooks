@@ -1,0 +1,8 @@
+---
+- name: Dummy Playbook for $pb
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Print dummy message
+      ansible.builtin.debug:
+        msg: "This is a dummy playbook for testing purposes."
